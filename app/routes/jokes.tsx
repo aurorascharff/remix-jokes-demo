@@ -1,7 +1,8 @@
 import { MetaFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData, useNavigation } from "@remix-run/react";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
+import { cn } from "~/utils/style";
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,6 +22,7 @@ export const loader = async () => {
 
 export default function JokesRoute() {
   const data = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
 
   return (
     <div className="flex min-h-[100svh] w-full flex-col gap-5 bg-purple">
@@ -53,7 +55,7 @@ export default function JokesRoute() {
           </ul>
           <NavButton to="new">Add your own</NavButton>
         </div>
-        <div>
+        <div className={navigation.state === "loading" ? "opacity-50" : ""}>
           <Outlet />
         </div>
       </main>
