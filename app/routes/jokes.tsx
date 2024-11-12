@@ -2,7 +2,6 @@ import { MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useNavigation } from "@remix-run/react";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
-import { cn } from "~/utils/style";
 
 export const meta: MetaFunction = () => {
   return [
