@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+  // url               = env("DATABASE_URL") // Change to "file:./dev.db" with sqlite
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Remove with sqlite
+}
+
+model Joke {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  favorite  Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  name      String
+  content   String
+}
