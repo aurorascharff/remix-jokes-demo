@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   MetaFunction,
@@ -37,9 +37,9 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       status: 404,
     });
   }
-  return json({
+  return {
     joke,
-  });
+  };
 };
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {

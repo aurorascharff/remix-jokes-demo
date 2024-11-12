@@ -1,4 +1,3 @@
-import { json } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   Link,
@@ -20,7 +19,7 @@ export const loader = async () => {
       status: 404,
     });
   }
-  return json({ randomJoke });
+  return { randomJoke };
 };
 
 export default function JokesIndexRoute() {

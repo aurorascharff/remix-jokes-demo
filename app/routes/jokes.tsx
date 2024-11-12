@@ -1,4 +1,4 @@
-import { json, MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
@@ -16,7 +16,7 @@ export const loader = async () => {
     select: { id: true, name: true, favorite: true },
     take: 5,
   });
-  return json({ jokeListItems });
+  return { jokeListItems };
 };
 
 export default function JokesRoute() {
