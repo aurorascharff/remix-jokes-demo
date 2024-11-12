@@ -1,4 +1,6 @@
-# Welcome to Remix!
+# Remix Jokes Modern
+
+This is a modernized version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the latest features of Remix + Tailwind CSS.
 
 - 📖 [Remix docs](https://remix.run/docs)
 
