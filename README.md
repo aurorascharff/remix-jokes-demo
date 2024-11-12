@@ -12,6 +12,31 @@ Run the dev server:
 npm run dev
 ```
 
+## Prisma Setup
+
+Add a `.env` file to the root of the project, refer to `.env.sample` for the required environment variables.
+You need decide between prisma local development with `sqlite` or a real database with for example `sqlserver`. Define it in the `schema.prisma` file.
+
+After switching, delete the `prisma/migrations` folder before running the migration command.
+
+When using sqlserver, you need to migrate the database schema with:
+
+```bash
+npm run prisma.migrate
+```
+
+When using sqllite, initialize with:
+
+```bash
+npm run prisma.push
+```
+
+Seed prisma/seed.ts for initial data:
+
+```sh
+npm run prisma.seed
+```
+
 ## Deployment
 
 First, build your app for production:
