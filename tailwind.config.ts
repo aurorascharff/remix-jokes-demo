@@ -37,7 +37,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-baloo)"],
+        display: ["Baloo", "cursive"],
       },
       textShadow: {
         DEFAULT: "0 2px 0 #000000, 0 2px 40px #000000",
