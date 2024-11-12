@@ -26,8 +26,8 @@ export default function JokesIndexRoute() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div>
-      <p>Here&apos;s a random joke:</p>
+    <div className="flex flex-col gap-y-4">
+      <p>Heres a random joke:</p>
       <p>{data.randomJoke.content}</p>
       <Link to={data.randomJoke.id}>
         &quot;{data.randomJoke.name}&quot; Permalink

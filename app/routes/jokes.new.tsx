@@ -84,7 +84,7 @@ export default function NewJokeRoute() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <p>Add your own hilarious joke</p>
       <Form method="post">
         <div>
@@ -101,7 +101,9 @@ export default function NewJokeRoute() {
             />
           </label>
           {actionData?.fieldErrors?.name ? (
-            <p role="alert">{actionData.fieldErrors.name}</p>
+            <p className="text-red" role="alert">
+              {actionData.fieldErrors.name}
+            </p>
           ) : null}
         </div>
         <div>
@@ -117,10 +119,12 @@ export default function NewJokeRoute() {
             />
           </label>
           {actionData?.fieldErrors?.content ? (
-            <p role="alert">{actionData.fieldErrors.content}</p>
+            <p className="text-red" role="alert">
+              {actionData.fieldErrors.content}
+            </p>
           ) : null}
         </div>
-        <div>
+        <div className="flex justify-end">
           {actionData?.formError ? (
             <p role="alert">{actionData.formError}</p>
           ) : null}
