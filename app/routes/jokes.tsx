@@ -2,6 +2,7 @@ import { MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useNavigation } from "@remix-run/react";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
+import { cn } from "~/utils/style";
 
 export const meta: MetaFunction = () => {
   return [
@@ -54,7 +55,12 @@ export default function JokesRoute() {
           </ul>
           <NavButton to="new">Add your own</NavButton>
         </div>
-        <div className={navigation.state === "loading" ? "opacity-50" : ""}>
+        <div
+          className={cn(
+            navigation.state === "loading" && "opacity-50",
+            "w-full xl:w-1/3"
+          )}
+        >
           <Outlet />
         </div>
       </main>

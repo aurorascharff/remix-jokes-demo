@@ -1,18 +1,30 @@
 import { ActionFunctionArgs, MetaFunction, redirect } from "@remix-run/node";
 import {
   Form,
-  isRouteErrorResponse,
-  Link,
   useActionData,
   useNavigation,
   useRouteError,
 } from "@remix-run/react";
 import { prisma } from "db";
-import JokeDisplay from "~/components/JokeDisplay";
 import Button from "~/components/ui/Button";
 import ErrorMessage from "~/components/ui/ErrorMessage";
-import { badRequest } from "~/utils/bad-request";
 import { slow } from "~/utils/slow";
+import { z } from "zod";
+import TextArea from "~/components/ui/TextArea";
+import Input from "~/components/ui/Input";
+import JokeDisplay from "~/components/JokeDisplay";
+import { badRequest } from "~/utils/bad-request";
+
+const jokeSchema = z.object({
+  content: z.string().min(5, {
+    message: "That joke is too short",
+  }),
+  createdAt: z.date().optional(),
+  id: z.string().optional(),
+  name: z.string().min(2, {
+    message: "That joke's name is too short",
+  }),
+});
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,47 +33,28 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-function validateJokeContent(content: string) {
-  if (content.length < 10) {
-    return "That joke is too short";
-  }
-}
-
-function validateJokeName(name: string) {
-  if (name.length < 3) {
-    return "That joke's name is too short";
-  }
-}
-
 export const action = async ({ request }: ActionFunctionArgs) => {
   await slow();
 
   const form = await request.formData();
-  const content = form.get("content");
-  const name = form.get("name");
-  if (typeof content !== "string" || typeof name !== "string") {
-    return badRequest({
-      fieldErrors: null,
-      fields: null,
-      formError: "Form not submitted correctly.",
-    });
-  }
+  const result = jokeSchema.safeParse({
+    content: form.get("content"),
+    name: form.get("name"),
+  });
 
-  const fieldErrors = {
-    content: validateJokeContent(content),
-    name: validateJokeName(name),
-  };
-  const fields = { content, name };
-  if (Object.values(fieldErrors).some(Boolean)) {
+  if (!result.success) {
     return badRequest({
-      fieldErrors,
-      fields,
+      fieldErrors: result.error.formErrors.fieldErrors,
+      fields: {
+        content: form.get("content") as string,
+        name: form.get("name") as string,
+      },
       formError: null,
     });
   }
 
   const joke = await prisma.joke.create({
-    data: fields,
+    data: result.data,
   });
   return redirect(`/jokes/${joke.id}`);
 };
@@ -71,15 +64,20 @@ export default function NewJokeRoute() {
   const navigation = useNavigation();
 
   if (navigation.formData) {
-    const content = navigation.formData.get("content");
-    const name = navigation.formData.get("name");
-    if (
-      typeof content === "string" &&
-      typeof name === "string" &&
-      !validateJokeContent(content) &&
-      !validateJokeName(name)
-    ) {
-      return <JokeDisplay joke={{ name, content, favorite: false }} />;
+    const result = jokeSchema.safeParse({
+      content: navigation.formData.get("content"),
+      name: navigation.formData.get("name"),
+    });
+    if (result.success) {
+      return (
+        <JokeDisplay
+          joke={{
+            name: result.data.name,
+            content: result.data.content,
+            favorite: false,
+          }}
+        />
+      );
     }
   }
 
@@ -90,39 +88,23 @@ export default function NewJokeRoute() {
         <div>
           <label>
             Name:{" "}
-            <input
+            <Input
+              errors={actionData?.fieldErrors?.name}
               defaultValue={actionData?.fields?.name}
               name="name"
               type="text"
-              aria-invalid={Boolean(actionData?.fieldErrors?.name)}
-              aria-errormessage={
-                actionData?.fieldErrors?.name ? "name-error" : undefined
-              }
             />
           </label>
-          {actionData?.fieldErrors?.name ? (
-            <p className="text-red" role="alert">
-              {actionData.fieldErrors.name}
-            </p>
-          ) : null}
         </div>
         <div>
           <label>
             Content:{" "}
-            <textarea
+            <TextArea
+              errors={actionData?.fieldErrors?.content}
               defaultValue={actionData?.fields?.content}
               name="content"
-              aria-invalid={Boolean(actionData?.fieldErrors?.content)}
-              aria-errormessage={
-                actionData?.fieldErrors?.content ? "content-error" : undefined
-              }
             />
           </label>
-          {actionData?.fieldErrors?.content ? (
-            <p className="text-red" role="alert">
-              {actionData.fieldErrors.content}
-            </p>
-          ) : null}
         </div>
         <div className="flex justify-end">
           {actionData?.formError ? (
@@ -138,15 +120,6 @@ export default function NewJokeRoute() {
 export function ErrorBoundary() {
   const error = useRouteError();
   console.error(error);
-
-  if (isRouteErrorResponse(error) && error.status === 401) {
-    return (
-      <ErrorMessage>
-        <p>You must be logged in to create a joke.</p>
-        <Link to="/login">Login</Link>
-      </ErrorMessage>
-    );
-  }
 
   return (
     <ErrorMessage>
