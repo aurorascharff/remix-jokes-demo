@@ -27,7 +27,7 @@ export default function JokeDisplay({
           type="submit"
           value="delete"
         >
-          Delete
+          {isSubmitting ? "Deleting..." : "Delete"}
         </Button>
       </fetcher.Form>
     </div>

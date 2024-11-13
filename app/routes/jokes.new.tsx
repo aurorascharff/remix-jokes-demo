@@ -11,7 +11,6 @@ import { slow } from "~/utils/slow";
 import { z } from "zod";
 import TextArea from "~/components/ui/TextArea";
 import Input from "~/components/ui/Input";
-import JokeDisplay from "~/components/JokeDisplay";
 import { badRequest } from "~/utils/bad-request";
 import Button from "~/components/ui/Button";
 
@@ -61,25 +60,27 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function NewJokeRoute() {
   const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
+  const isSubmitting = navigation.state !== "idle";
 
-  if (navigation.formData) {
-    const result = jokeSchema.safeParse({
-      content: navigation.formData.get("content"),
-      name: navigation.formData.get("name"),
-    });
-    if (result.success) {
-      return (
-        <JokeDisplay
-          canDelete={false}
-          joke={{
-            name: result.data.name,
-            content: result.data.content,
-            favorite: false,
-          }}
-        />
-      );
-    }
-  }
+  // // Optimistic update
+  // if (navigation.formData) {
+  //   const result = jokeSchema.safeParse({
+  //     content: navigation.formData.get("content"),
+  //     name: navigation.formData.get("name"),
+  //   });
+  //   if (result.success) {
+  //     return (
+  //       <JokeDisplay
+  //         canDelete={false}
+  //         joke={{
+  //           name: result.data.name,
+  //           content: result.data.content,
+  //           favorite: false,
+  //         }}
+  //       />
+  //     );
+  //   }
+  // }
 
   return (
     <div className="flex flex-col gap-5">
@@ -107,7 +108,9 @@ export default function NewJokeRoute() {
           </label>
         </div>
         <div className="flex justify-end">
-          <Button type="submit">Add</Button>
+          <Button disabled={isSubmitting} type="submit">
+            {isSubmitting ? "Adding..." : "Add"}
+          </Button>
         </div>
       </Form>
     </div>
