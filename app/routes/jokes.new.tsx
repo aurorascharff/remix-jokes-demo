@@ -6,7 +6,6 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import { prisma } from "db";
-import Button from "~/components/ui/Button";
 import ErrorMessage from "~/components/ui/ErrorMessage";
 import { slow } from "~/utils/slow";
 import { z } from "zod";
@@ -49,7 +48,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         content: form.get("content") as string,
         name: form.get("name") as string,
       },
-      formError: null,
     });
   }
 
@@ -105,12 +103,6 @@ export default function NewJokeRoute() {
               name="content"
             />
           </label>
-        </div>
-        <div className="flex justify-end">
-          {actionData?.formError ? (
-            <p role="alert">{actionData.formError}</p>
-          ) : null}
-          <Button type="submit">Add</Button>
         </div>
       </Form>
     </div>
