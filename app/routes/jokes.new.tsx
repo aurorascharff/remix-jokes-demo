@@ -34,8 +34,6 @@ export const meta: MetaFunction = () => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  await slow();
-
   const form = await request.formData();
   const result = jokeSchema.safeParse({
     content: form.get("content"),
@@ -51,6 +49,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       },
     });
   }
+
+  await slow();
 
   const joke = await prisma.joke.create({
     data: result.data,

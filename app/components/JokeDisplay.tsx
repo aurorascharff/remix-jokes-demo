@@ -1,5 +1,5 @@
 import type { Joke } from "@prisma/client";
-import { Form, Link, useFetcher } from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
 import Button from "./ui/Button";
 
 export default function JokeDisplay({
@@ -7,8 +7,11 @@ export default function JokeDisplay({
   canDelete = true,
 }: {
   joke: Pick<Joke, "content" | "name" | "favorite">;
-  canDelete: boolean;
+  canDelete?: boolean;
 }) {
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
+
   return (
     <div className="flex flex-col gap-y-4">
       <p>Here&apos;s your hilarious joke:</p>
@@ -17,16 +20,16 @@ export default function JokeDisplay({
         <Link to=".">&quot;{joke.name}&quot; Permalink</Link>
         <Favorite joke={joke} />
       </div>
-      <Form action="destroy" method="post">
+      <fetcher.Form action="destroy" method="post">
         <Button
-          disabled={!canDelete}
+          disabled={!canDelete || isSubmitting}
           name="intent"
           type="submit"
           value="delete"
         >
           Delete
         </Button>
-      </Form>
+      </fetcher.Form>
     </div>
   );
 }
