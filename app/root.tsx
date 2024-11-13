@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from "@remix-run/react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -28,4 +29,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  const errorMessage = error instanceof Error ? error.message : "Unknown error";
+  return (
+    <div className="error-container">
+      <h1>App Error</h1>
+      <pre>{errorMessage}</pre>
+    </div>
+  );
 }
