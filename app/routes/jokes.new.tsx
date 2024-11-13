@@ -13,6 +13,7 @@ import TextArea from "~/components/ui/TextArea";
 import Input from "~/components/ui/Input";
 import { badRequest } from "~/utils/bad-request";
 import Button from "~/components/ui/Button";
+import JokeDisplay from "~/components/JokeDisplay";
 
 const jokeSchema = z.object({
   content: z.string().min(5, {
@@ -62,25 +63,25 @@ export default function NewJokeRoute() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== "idle";
 
-  // // Optimistic update
-  // if (navigation.formData) {
-  //   const result = jokeSchema.safeParse({
-  //     content: navigation.formData.get("content"),
-  //     name: navigation.formData.get("name"),
-  //   });
-  //   if (result.success) {
-  //     return (
-  //       <JokeDisplay
-  //         canDelete={false}
-  //         joke={{
-  //           name: result.data.name,
-  //           content: result.data.content,
-  //           favorite: false,
-  //         }}
-  //       />
-  //     );
-  //   }
-  // }
+  // Optimistic update
+  if (navigation.formData) {
+    const result = jokeSchema.safeParse({
+      content: navigation.formData.get("content"),
+      name: navigation.formData.get("name"),
+    });
+    if (result.success) {
+      return (
+        <JokeDisplay
+          canDelete={false}
+          joke={{
+            name: result.data.name,
+            content: result.data.content,
+            favorite: false,
+          }}
+        />
+      );
+    }
+  }
 
   return (
     <div className="flex flex-col gap-5">

@@ -1,11 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
-import {
-  Link,
-  Outlet,
-  useLoaderData,
-  useLocation,
-  useNavigation,
-} from "@remix-run/react";
+import { Link, Outlet, useLoaderData, useNavigation } from "@remix-run/react";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
 import { cn } from "~/utils/style";
@@ -29,7 +23,6 @@ export const loader = async () => {
 export default function JokesRoute() {
   const data = useLoaderData<typeof loader>();
   const navigation = useNavigation();
-  const location = useLocation();
   const isLoadingJoke =
     navigation.state === "loading" && location.pathname !== "/jokes/new";
 
@@ -64,7 +57,9 @@ export default function JokesRoute() {
           </ul>
           <NavButton to="new">Add your own</NavButton>
         </div>
-        <div className={cn(isLoadingJoke && "opacity-50", "w-full xl:w-1/3")}>
+        <div
+          className={cn(isLoadingJoke && "animate-pulse", "w-full xl:w-1/3")}
+        >
           <Outlet />
         </div>
       </main>
