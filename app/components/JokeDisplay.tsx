@@ -10,7 +10,7 @@ export default function JokeDisplay({
   canDelete?: boolean;
 }) {
   const navigation = useNavigation();
-  const isSubmitting = navigation.formAction?.includes("destroy");
+  const isSubmitting = navigation.formData?.get("intent") === "delete";
 
   return (
     <div className="flex flex-col gap-y-4">
