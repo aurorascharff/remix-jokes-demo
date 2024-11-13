@@ -1,6 +1,6 @@
-# Remix Jokes Modern
+# Remix Jokes Demo
 
-This is a modernized version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the latest features of Remix + Tailwind CSS.
+This is a modified version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the more features of Remix to enable pending UI, zod for schema validation, and Tailwind CSS.
 
 - 📖 [Remix docs](https://remix.run/docs)
 
