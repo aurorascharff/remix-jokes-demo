@@ -13,6 +13,7 @@ import TextArea from "~/components/ui/TextArea";
 import Input from "~/components/ui/Input";
 import JokeDisplay from "~/components/JokeDisplay";
 import { badRequest } from "~/utils/bad-request";
+import Button from "~/components/ui/Button";
 
 const jokeSchema = z.object({
   content: z.string().min(5, {
@@ -69,6 +70,7 @@ export default function NewJokeRoute() {
     if (result.success) {
       return (
         <JokeDisplay
+          canDelete={false}
           joke={{
             name: result.data.name,
             content: result.data.content,
@@ -103,6 +105,9 @@ export default function NewJokeRoute() {
               name="content"
             />
           </label>
+        </div>
+        <div className="flex justify-end">
+          <Button type="submit">Add</Button>
         </div>
       </Form>
     </div>

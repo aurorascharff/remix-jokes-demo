@@ -4,8 +4,10 @@ import Button from "./ui/Button";
 
 export default function JokeDisplay({
   joke,
+  canDelete = true,
 }: {
   joke: Pick<Joke, "content" | "name" | "favorite">;
+  canDelete: boolean;
 }) {
   return (
     <div className="flex flex-col gap-y-4">
@@ -16,7 +18,12 @@ export default function JokeDisplay({
         <Favorite joke={joke} />
       </div>
       <Form action="destroy" method="post">
-        <Button name="intent" type="submit" value="delete">
+        <Button
+          disabled={!canDelete}
+          name="intent"
+          type="submit"
+          value="delete"
+        >
           Delete
         </Button>
       </Form>
