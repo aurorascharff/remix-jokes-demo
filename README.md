@@ -1,6 +1,6 @@
 # Remix Jokes Demo
 
-This is a modified version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the more features of Remix to enable pending UI, zod for schema validation, and Tailwind CSS.
+This is an upgraded and modified version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the more features of Remix to enable pending UI, zod for schema validation, and Tailwind CSS.
 
 - 📖 [Remix docs](https://remix.run/docs)
 
