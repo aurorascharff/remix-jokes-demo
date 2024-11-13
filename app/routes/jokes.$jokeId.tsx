@@ -66,13 +66,6 @@ export function ErrorBoundary() {
   console.error(error);
 
   if (isRouteErrorResponse(error)) {
-    if (error.status === 400) {
-      return (
-        <ErrorMessage>
-          What you&apos;re trying to do is not allowed.
-        </ErrorMessage>
-      );
-    }
     if (error.status === 404) {
       return (
         <ErrorMessage>Huh? What the heck is &quot;{jokeId}&quot;?</ErrorMessage>
