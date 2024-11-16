@@ -10,7 +10,7 @@ import ErrorMessage from "~/components/ui/ErrorMessage";
 import { slow } from "~/utils/slow";
 import type { Route } from "./+types.jokes.$jokeId";
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<() => Route.LoaderData> = ({ data }) => {
   const { description, title } = data
     ? {
         description: `Enjoy the "${data.joke.name}" joke and much more`,
