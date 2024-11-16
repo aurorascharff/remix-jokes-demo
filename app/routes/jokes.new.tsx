@@ -61,7 +61,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function NewJokeRoute() {
   const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
-  const isSubmitting = navigation.state !== "idle";
+  const isSubmitting =
+    navigation.state !== "idle" && navigation.formAction === "jokes/new";
 
   // Optimistic update
   if (navigation.formData) {
