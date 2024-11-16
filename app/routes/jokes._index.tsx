@@ -1,11 +1,7 @@
-import {
-  isRouteErrorResponse,
-  Link,
-  useLoaderData,
-  useRouteError,
-} from "@remix-run/react";
+import { isRouteErrorResponse, Link, useRouteError } from "react-router";
 import { prisma } from "db";
 import ErrorMessage from "~/components/ui/ErrorMessage";
+import type { Route } from "./+types.jokes._index";
 
 export const loader = async () => {
   const count = await prisma.joke.count();
@@ -22,15 +18,13 @@ export const loader = async () => {
   return { randomJoke };
 };
 
-export default function JokesIndexRoute() {
-  const data = useLoaderData<typeof loader>();
-
+export default function JokesIndexRoute({ loaderData }: Route.ComponentProps) {
   return (
     <div className="flex flex-col gap-y-4">
       <p>Heres a random joke:</p>
-      <p>{data.randomJoke.content}</p>
-      <Link to={data.randomJoke.id}>
-        &quot;{data.randomJoke.name}&quot; Permalink
+      <p>{loaderData.randomJoke.content}</p>
+      <Link to={loaderData.randomJoke.id}>
+        &quot;{loaderData.randomJoke.name}&quot; Permalink
       </Link>
     </div>
   );

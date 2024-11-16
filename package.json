@@ -1,33 +1,34 @@
 {
-  "name": "remix-jokes-demo",
+  "name": "remix-jokes-rrv7",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "dev": "remix vite:dev",
+    "build": "react-router build",
+    "dev": "react-router dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "remix-serve ./build/server/index.js",
+    "start": "react-router-serve ./build/server/index.js",
     "prisma.studio": "npx prisma studio",
     "prisma.seed": "npx prisma db seed",
     "prisma.migrate": "npx prisma migrate dev",
     "prisma.push": "npx prisma db push",
-    "typecheck": "tsc"
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
-    "@remix-run/node": "^2.14.0",
-    "@remix-run/react": "^2.14.0",
-    "@remix-run/serve": "^2.14.0",
+    "@react-router/node": "^7.0.0-pre.5",
+    "@react-router/serve": "^7.0.0-pre.5",
     "clsx": "^2.1.1",
     "isbot": "^5.1.17",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router": "^7.0.0-pre.5",
     "tailwind-merge": "^2.5.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.14.0",
+    "@react-router/fs-routes": "7.0.0-pre.5",
+    "@react-router/dev": "^7.0.0-pre.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^6.7.4",

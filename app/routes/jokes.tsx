@@ -1,8 +1,8 @@
-import { MetaFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData, useNavigation } from "@remix-run/react";
+import { Link, Outlet, useNavigation, MetaFunction } from "react-router";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
 import { cn } from "~/utils/style";
+import type { Route } from "./+types.jokes";
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,8 +20,7 @@ export const loader = async () => {
   return { jokeListItems };
 };
 
-export default function JokesRoute() {
-  const data = useLoaderData<typeof loader>();
+export default function JokesRoute({ loaderData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const isLoadingJoke =
     navigation.state === "loading" && location.pathname !== "/jokes/new";
@@ -47,7 +46,7 @@ export default function JokesRoute() {
           </Link>
           <p>Here are a few more jokes to check out:</p>
           <ul>
-            {data.jokeListItems.map(({ id, name, favorite }) => (
+            {loaderData.jokeListItems.map(({ id, name, favorite }) => (
               <li key={id}>
                 <Link prefetch="intent" to={id}>
                   {name} {favorite ? "★" : ""}

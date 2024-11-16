@@ -1,17 +1,15 @@
-import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   MetaFunction,
-  useLoaderData,
-  useParams,
   useRouteError,
-} from "@remix-run/react";
+} from "react-router";
 import { prisma } from "db";
 import JokeDisplay from "~/components/JokeDisplay";
 import ErrorMessage from "~/components/ui/ErrorMessage";
 import { slow } from "~/utils/slow";
+import type { Route } from "./+types.jokes.$jokeId";
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<() => Route.LoaderData> = ({ data }) => {
   const { description, title } = data
     ? {
         description: `Enjoy the "${data.joke.name}" joke and much more`,
@@ -26,7 +24,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   await slow();
 
   const joke = await prisma.joke.findUnique({
@@ -42,7 +40,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   };
 };
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
+export const action = async ({ params, request }: Route.ActionArgs) => {
   await slow();
 
   const formData = await request.formData();
@@ -54,14 +52,12 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   });
 };
 
-export default function JokeRoute() {
-  const data = useLoaderData<typeof loader>();
-
-  return <JokeDisplay joke={data.joke} />;
+export default function JokeRoute({ loaderData }: Route.ComponentProps) {
+  return <JokeDisplay joke={loaderData.joke} />;
 }
 
-export function ErrorBoundary() {
-  const { jokeId } = useParams();
+export function ErrorBoundary({ params }: Route.ErrorBoundaryProps) {
+  const jokeId = params.jokeId;
   const error = useRouteError();
   console.error(error);
 
