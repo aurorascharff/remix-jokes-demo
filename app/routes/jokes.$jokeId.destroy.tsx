@@ -1,8 +1,9 @@
-import { ActionFunctionArgs, redirect } from "react-router";
+import { redirect } from "react-router";
 import { prisma } from "db";
 import { slow } from "~/utils/slow";
+import type { Route } from "./+types.jokes.$jokeId.destroy";
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
+export const action = async ({ params, request }: Route.ActionArgs) => {
   await slow();
 
   const form = await request.formData();

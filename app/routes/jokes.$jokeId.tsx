@@ -1,6 +1,4 @@
 import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
   isRouteErrorResponse,
   MetaFunction,
   useLoaderData,
@@ -11,6 +9,7 @@ import { prisma } from "db";
 import JokeDisplay from "~/components/JokeDisplay";
 import ErrorMessage from "~/components/ui/ErrorMessage";
 import { slow } from "~/utils/slow";
+import type { Route } from "./+types.jokes.$jokeId";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const { description, title } = data
@@ -27,7 +26,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   await slow();
 
   const joke = await prisma.joke.findUnique({
@@ -43,7 +42,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   };
 };
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
+export const action = async ({ params, request }: Route.ActionArgs) => {
   await slow();
 
   const formData = await request.formData();
@@ -61,8 +60,8 @@ export default function JokeRoute() {
   return <JokeDisplay joke={data.joke} />;
 }
 
-export function ErrorBoundary() {
-  const { jokeId } = useParams();
+export function ErrorBoundary({ params }: Route.ErrorBoundaryProps) {
+  const jokeId = params.jokeId;
   const error = useRouteError();
   console.error(error);
 

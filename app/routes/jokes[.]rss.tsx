@@ -1,5 +1,5 @@
-import { LoaderFunctionArgs } from "react-router";
 import { prisma } from "db";
+import type { Route } from "./+types.jokes[.]rss";
 
 function escapeCdata(s: string) {
   return s.replace(/\]\]>/g, "]]]]><![CDATA[>");
@@ -14,7 +14,7 @@ function escapeHtml(s: string) {
     .replace(/'/g, "&#039;");
 }
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   const jokes = await prisma.joke.findMany({
     orderBy: { createdAt: "desc" },
     take: 100,

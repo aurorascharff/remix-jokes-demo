@@ -1,6 +1,14 @@
+import type { Route } from "./routes/+types._index";
 import "./styles/globals.css";
 
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from "react-router";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteError,
+} from "react-router";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
