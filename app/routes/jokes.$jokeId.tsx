@@ -1,7 +1,6 @@
 import {
   isRouteErrorResponse,
   MetaFunction,
-  useLoaderData,
   useRouteError,
 } from "react-router";
 import { prisma } from "db";
@@ -53,10 +52,8 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
   });
 };
 
-export default function JokeRoute() {
-  const data = useLoaderData<typeof loader>();
-
-  return <JokeDisplay joke={data.joke} />;
+export default function JokeRoute({ loaderData }: Route.ComponentProps) {
+  return <JokeDisplay joke={loaderData.joke} />;
 }
 
 export function ErrorBoundary({ params }: Route.ErrorBoundaryProps) {
