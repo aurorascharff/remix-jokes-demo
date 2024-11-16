@@ -1,8 +1,8 @@
-# Remix Jokes Demo
+# Remix Jokes with Pending UI, Zod, Tailwind CSS and React Router v7
 
-This is an upgraded and modified version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the more features of Remix to enable pending UI, zod for schema validation, and Tailwind CSS.
+This is an upgraded and modified version of [Remix Jokes](https://github.com/remix-run/examples/tree/main/_official-jokes) that uses the more features of Remix to enable pending UI, zod for schema validation, and Tailwind CSS. It has also been migrated to React Router v7.
 
-- 📖 [Remix docs](https://remix.run/docs)
+- 📖 [React Router v7 docs](https://reactrouter.com/dev/start/framework/installation)
 
 ## Development
 
@@ -25,7 +25,7 @@ When using sqlserver, you need to migrate the database schema with:
 npm run prisma.migrate
 ```
 
-When using sqllite, initialize with:
+When using sqlite, initialize with:
 
 ```bash
 npm run prisma.push
