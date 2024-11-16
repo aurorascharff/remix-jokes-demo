@@ -1,4 +1,3 @@
-import type { Route } from "./routes/+types._index";
 import "./styles/globals.css";
 
 import {

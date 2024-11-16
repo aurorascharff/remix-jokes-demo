@@ -2,7 +2,6 @@ import {
   isRouteErrorResponse,
   MetaFunction,
   useLoaderData,
-  useParams,
   useRouteError,
 } from "react-router";
 import { prisma } from "db";
