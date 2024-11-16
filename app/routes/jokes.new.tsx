@@ -14,6 +14,7 @@ import Input from "~/components/ui/Input";
 import Button from "~/components/ui/Button";
 import JokeDisplay from "~/components/JokeDisplay";
 import type { Route } from "./+types.jokes.new";
+import { badRequest } from "~/utils/bad-request";
 
 const jokeSchema = z.object({
   content: z.string().min(5, {
@@ -41,13 +42,13 @@ export const action = async ({ request }: Route.ActionArgs) => {
   });
 
   if (!result.success) {
-    return {
+    return badRequest({
       fieldErrors: result.error.formErrors.fieldErrors,
       fields: {
         content: form.get("content") as string,
         name: form.get("name") as string,
       },
-    };
+    });
   }
 
   await slow();
