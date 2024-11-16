@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, redirect } from "react-router";
 import { prisma } from "db";
 import { slow } from "~/utils/slow";
 

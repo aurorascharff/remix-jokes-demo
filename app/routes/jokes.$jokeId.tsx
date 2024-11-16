@@ -1,11 +1,12 @@
-import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
   isRouteErrorResponse,
   MetaFunction,
   useLoaderData,
   useParams,
   useRouteError,
-} from "@remix-run/react";
+} from "react-router";
 import { prisma } from "db";
 import JokeDisplay from "~/components/JokeDisplay";
 import ErrorMessage from "~/components/ui/ErrorMessage";

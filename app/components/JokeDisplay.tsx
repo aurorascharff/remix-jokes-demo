@@ -1,5 +1,5 @@
 import type { Joke } from "@prisma/client";
-import { Form, Link, useFetcher, useNavigation } from "@remix-run/react";
+import { Form, Link, useFetcher, useNavigation } from "react-router";
 import Button from "./ui/Button";
 
 export default function JokeDisplay({

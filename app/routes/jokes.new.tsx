@@ -1,17 +1,18 @@
-import { ActionFunctionArgs, MetaFunction, redirect } from "@remix-run/node";
 import {
   Form,
-  useActionData,
   useNavigation,
   useRouteError,
-} from "@remix-run/react";
+  ActionFunctionArgs,
+  MetaFunction,
+  redirect,
+  useActionData,
+} from "react-router";
 import { prisma } from "db";
 import ErrorMessage from "~/components/ui/ErrorMessage";
 import { slow } from "~/utils/slow";
 import { z } from "zod";
 import TextArea from "~/components/ui/TextArea";
 import Input from "~/components/ui/Input";
-import { badRequest } from "~/utils/bad-request";
 import Button from "~/components/ui/Button";
 import JokeDisplay from "~/components/JokeDisplay";
 
@@ -41,13 +42,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   });
 
   if (!result.success) {
-    return badRequest({
+    return {
       fieldErrors: result.error.formErrors.fieldErrors,
       fields: {
         content: form.get("content") as string,
         name: form.get("name") as string,
       },
-    });
+    };
   }
 
   await slow();

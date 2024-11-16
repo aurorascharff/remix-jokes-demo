@@ -1,5 +1,10 @@
-import { MetaFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData, useNavigation } from "@remix-run/react";
+import {
+  Link,
+  Outlet,
+  useLoaderData,
+  useNavigation,
+  MetaFunction,
+} from "react-router";
 import { prisma } from "db";
 import NavButton from "~/components/ui/NavButton";
 import { cn } from "~/utils/style";
