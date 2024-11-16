@@ -5,7 +5,7 @@ import {
   ActionFunctionArgs,
   MetaFunction,
   redirect,
-  useActionData,
+  data,
 } from "react-router";
 import { prisma } from "db";
 import ErrorMessage from "~/components/ui/ErrorMessage";
@@ -15,6 +15,7 @@ import TextArea from "~/components/ui/TextArea";
 import Input from "~/components/ui/Input";
 import Button from "~/components/ui/Button";
 import JokeDisplay from "~/components/JokeDisplay";
+import { Route } from ".react-router/types/app/routes/+types.jokes.new";
 
 const jokeSchema = z.object({
   content: z.string().min(5, {
@@ -42,13 +43,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   });
 
   if (!result.success) {
-    return {
+    return data({
       fieldErrors: result.error.formErrors.fieldErrors,
       fields: {
         content: form.get("content") as string,
         name: form.get("name") as string,
       },
-    };
+    });
   }
 
   await slow();
@@ -56,11 +57,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const joke = await prisma.joke.create({
     data: result.data,
   });
-  return redirect(`/jokes/${joke.id}`);
+  throw redirect(`/jokes/${joke.id}`);
 };
 
-export default function NewJokeRoute() {
-  const actionData = useActionData<typeof action>();
+export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const isSubmitting =
     navigation.state !== "idle" && navigation.formAction === "jokes/new";

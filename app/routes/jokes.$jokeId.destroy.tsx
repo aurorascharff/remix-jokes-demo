@@ -20,5 +20,5 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     });
   }
   await prisma.joke.delete({ where: { id: params.jokeId } });
-  return redirect("/jokes");
+  throw redirect("/jokes");
 };
