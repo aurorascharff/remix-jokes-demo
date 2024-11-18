@@ -2,51 +2,52 @@ import {
   Form,
   useNavigation,
   useRouteError,
-  MetaFunction,
   redirect,
-} from "react-router";
-import { prisma } from "db";
-import ErrorMessage from "~/components/ui/ErrorMessage";
-import { slow } from "~/utils/slow";
-import { z } from "zod";
-import TextArea from "~/components/ui/TextArea";
-import Input from "~/components/ui/Input";
-import Button from "~/components/ui/Button";
-import JokeDisplay from "~/components/JokeDisplay";
-import type { Route } from "./+types.jokes.new";
-import { badRequest } from "~/utils/bad-request";
+} from 'react-router';
+import { z } from 'zod';
+import type { Route } from './+types.jokes.new';
+import type {
+  MetaFunction} from 'react-router';
+import { prisma } from '~/../db';
+import JokeDisplay from '~/components/JokeDisplay';
+import Button from '~/components/ui/Button';
+import ErrorMessage from '~/components/ui/ErrorMessage';
+import Input from '~/components/ui/Input';
+import TextArea from '~/components/ui/TextArea';
+import { badRequest } from '~/utils/bad-request';
+import { slow } from '~/utils/slow';
 
 const jokeSchema = z.object({
   content: z.string().min(5, {
-    message: "That joke is too short",
+    message: 'That joke is too short',
   }),
   createdAt: z.date().optional(),
   id: z.string().optional(),
   name: z.string().min(2, {
-    message: "That joke's name is too short",
+    message: 'That joke\'s name is too short',
   }),
 });
 
 export const meta: MetaFunction = () => {
   return [
-    { name: "description", content: "Remix Jokes app" },
-    { title: "New joke" },
+    { content: 'Remix Jokes app', name: 'description' },
+    { title: 'New joke' },
   ];
 };
 
 export const action = async ({ request }: Route.ActionArgs) => {
   const form = await request.formData();
   const result = jokeSchema.safeParse({
-    content: form.get("content"),
-    name: form.get("name"),
+    content: form.get('content'),
+    name: form.get('name'),
   });
 
   if (!result.success) {
     return badRequest({
       fieldErrors: result.error.formErrors.fieldErrors,
       fields: {
-        content: form.get("content") as string,
-        name: form.get("name") as string,
+        content: form.get('content') as string,
+        name: form.get('name') as string,
       },
     });
   }
@@ -62,22 +63,22 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const isSubmitting =
-    navigation.state !== "idle" && navigation.formAction === "jokes/new";
+    navigation.state !== 'idle' && navigation.formAction === 'jokes/new';
 
   // Optimistic update
   if (navigation.formData) {
     const result = jokeSchema.safeParse({
-      content: navigation.formData.get("content"),
-      name: navigation.formData.get("name"),
+      content: navigation.formData.get('content'),
+      name: navigation.formData.get('name'),
     });
     if (result.success) {
       return (
         <JokeDisplay
           canDelete={false}
           joke={{
-            name: result.data.name,
             content: result.data.content,
             favorite: false,
+            name: result.data.name,
           }}
         />
       );
@@ -90,7 +91,7 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
       <Form method="post">
         <div>
           <label>
-            Name:{" "}
+            Name:{' '}
             <Input
               errors={actionData?.fieldErrors?.name}
               defaultValue={actionData?.fields?.name}
@@ -101,7 +102,7 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
         </div>
         <div>
           <label>
-            Content:{" "}
+            Content:{' '}
             <TextArea
               errors={actionData?.fieldErrors?.content}
               defaultValue={actionData?.fields?.content}
@@ -111,7 +112,7 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
         </div>
         <div className="flex justify-end">
           <Button disabled={isSubmitting} type="submit">
-            {isSubmitting ? "Adding..." : "Add"}
+            {isSubmitting ? 'Adding...' : 'Add'}
           </Button>
         </div>
       </Form>

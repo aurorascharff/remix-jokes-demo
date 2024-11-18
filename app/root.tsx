@@ -1,4 +1,4 @@
-import "./styles/globals.css";
+import './styles/globals.css';
 
 import {
   Links,
@@ -7,7 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
   useRouteError,
-} from "react-router";
+} from 'react-router';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -34,7 +34,7 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
 
-  const errorMessage = error instanceof Error ? error.message : "Unknown error";
+  const errorMessage = error instanceof Error ? error.message : 'Unknown error';
   return (
     <div className="error-container">
       <h1>App Error</h1>

@@ -1,9 +1,10 @@
-import { Link, MetaFunction } from "react-router";
+import { Link } from 'react-router';
+import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = () => {
   return [
-    { name: "description", content: "Remix Jokes app" },
-    { title: "Remix Jokes" },
+    { content: 'Remix Jokes app', name: 'description' },
+    { title: 'Remix Jokes' },
   ];
 };
 
@@ -12,7 +13,7 @@ export default function IndexRoute() {
     <div className="flex grow flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center pb-12 pt-12">
         <h1 className="text-center font-display text-6xl text-shadow">
-          Remix{" "}
+          Remix{' '}
           <span className="block font-display text-6xl uppercase leading-none md:text-9xl">
             Jokes!
           </span>

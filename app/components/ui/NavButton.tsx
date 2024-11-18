@@ -1,5 +1,6 @@
-import { Link, LinkProps } from "react-router";
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router';
+import type { LinkProps } from 'react-router';
 
 type Props = {
   to: string;

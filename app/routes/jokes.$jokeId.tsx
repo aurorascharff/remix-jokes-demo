@@ -1,13 +1,14 @@
 import {
   isRouteErrorResponse,
-  MetaFunction,
   useRouteError,
-} from "react-router";
-import { prisma } from "db";
-import JokeDisplay from "~/components/JokeDisplay";
-import ErrorMessage from "~/components/ui/ErrorMessage";
-import { slow } from "~/utils/slow";
-import type { Route } from "./+types.jokes.$jokeId";
+} from 'react-router';
+import type { Route } from './+types.jokes.$jokeId';
+import type {
+  MetaFunction} from 'react-router';
+import { prisma } from '~/../db';
+import JokeDisplay from '~/components/JokeDisplay';
+import ErrorMessage from '~/components/ui/ErrorMessage';
+import { slow } from '~/utils/slow';
 
 export const meta: MetaFunction<() => Route.LoaderData> = ({ data }) => {
   const { description, title } = data
@@ -15,11 +16,11 @@ export const meta: MetaFunction<() => Route.LoaderData> = ({ data }) => {
         description: `Enjoy the "${data.joke.name}" joke and much more`,
         title: `"${data.joke.name}" joke`,
       }
-    : { description: "No joke found", title: "No joke" };
+    : { description: 'No joke found', title: 'No joke' };
 
   return [
-    { name: "description", content: description },
-    { name: "twitter:description", content: description },
+    { content: description, name: 'description' },
+    { content: description, name: 'twitter:description' },
     { title },
   ];
 };
@@ -31,7 +32,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
     where: { id: params.jokeId },
   });
   if (!joke) {
-    throw new Response("What a joke! Not found.", {
+    throw new Response('What a joke! Not found.', {
       status: 404,
     });
   }
@@ -45,10 +46,10 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
 
   const formData = await request.formData();
   return prisma.joke.update({
-    where: { id: params.jokeId },
     data: {
-      favorite: formData.get("favorite") === "true",
+      favorite: formData.get('favorite') === 'true',
     },
+    where: { id: params.jokeId },
   });
 };
 

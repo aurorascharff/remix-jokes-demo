@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   errors?: string[];
@@ -15,7 +15,7 @@ export default function TextArea({
       <textarea
         id={name}
         name={name}
-        className={errors ? "outline outline-2 outline-red" : ""}
+        className={errors ? 'outline outline-2 outline-red' : ''}
         aria-describedby="error"
         {...otherProps}
       />

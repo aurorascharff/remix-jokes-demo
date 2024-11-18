@@ -1,7 +1,7 @@
-import { isRouteErrorResponse, Link, useRouteError } from "react-router";
-import { prisma } from "db";
-import ErrorMessage from "~/components/ui/ErrorMessage";
-import type { Route } from "./+types.jokes._index";
+import { isRouteErrorResponse, Link, useRouteError } from 'react-router';
+import type { Route } from './+types.jokes._index';
+import { prisma } from '~/../db';
+import ErrorMessage from '~/components/ui/ErrorMessage';
 
 export const loader = async () => {
   const count = await prisma.joke.count();
@@ -11,7 +11,7 @@ export const loader = async () => {
     take: 1,
   });
   if (!randomJoke) {
-    throw new Response("No random joke found", {
+    throw new Response('No random joke found', {
       status: 404,
     });
   }

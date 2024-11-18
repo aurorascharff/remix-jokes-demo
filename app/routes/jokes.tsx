@@ -1,20 +1,21 @@
-import { Link, Outlet, useNavigation, MetaFunction } from "react-router";
-import { prisma } from "db";
-import NavButton from "~/components/ui/NavButton";
-import { cn } from "~/utils/style";
-import type { Route } from "./+types.jokes";
+import { Link, Outlet, useNavigation } from 'react-router';
+import type { Route } from './+types.jokes';
+import type { MetaFunction } from 'react-router';
+import { prisma } from '~/../db';
+import NavButton from '~/components/ui/NavButton';
+import { cn } from '~/utils/style';
 
 export const meta: MetaFunction = () => {
   return [
-    { name: "description", content: "Remix Jokes app" },
-    { title: "Jokes" },
+    { content: 'Remix Jokes app', name: 'description' },
+    { title: 'Jokes' },
   ];
 };
 
 export const loader = async () => {
   const jokeListItems = await prisma.joke.findMany({
-    orderBy: { createdAt: "desc" },
-    select: { id: true, name: true, favorite: true },
+    orderBy: { createdAt: 'desc' },
+    select: { favorite: true, id: true, name: true },
     take: 5,
   });
   return { jokeListItems };
@@ -23,7 +24,7 @@ export const loader = async () => {
 export default function JokesRoute({ loaderData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const isLoadingJoke =
-    navigation.state === "loading" && location.pathname !== "/jokes/new";
+    navigation.state === 'loading' && location.pathname !== '/jokes/new';
 
   return (
     <div className="flex min-h-[100svh] w-full flex-col gap-5 bg-purple">
@@ -46,18 +47,18 @@ export default function JokesRoute({ loaderData }: Route.ComponentProps) {
           </Link>
           <p>Here are a few more jokes to check out:</p>
           <ul>
-            {loaderData.jokeListItems.map(({ id, name, favorite }) => (
+            {loaderData.jokeListItems.map(({ id, name, favorite }) => {return (
               <li key={id}>
                 <Link prefetch="intent" to={id}>
-                  {name} {favorite ? "★" : ""}
+                  {name} {favorite ? '★' : ''}
                 </Link>
               </li>
-            ))}
+            )})}
           </ul>
           <NavButton to="new">Add your own</NavButton>
         </div>
         <div
-          className={cn(isLoadingJoke && "animate-pulse", "w-full xl:w-1/3")}
+          className={cn(isLoadingJoke && 'animate-pulse', 'w-full xl:w-1/3')}
         >
           <Outlet />
         </div>
