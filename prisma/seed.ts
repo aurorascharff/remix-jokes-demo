@@ -4,34 +4,40 @@ const prisma = new PrismaClient();
 
 const JOKES = [
   {
-    content:
-      'Why did the functions stop calling each other? Because they had constant arguments.',
+    content: 'Why did the functions stop calling each other? Because they had constant arguments.',
     name: 'Functions',
   },
   {
-    content:
-      'Why was the developer unhappy with their job? They wanted arrays.',
+    content: 'Why was the developer unhappy with their job? They wanted arrays.',
     favorite: true,
     name: 'Arrays',
   },
   {
-    content:
-      'Why was the function sad after a successful first call? Because he didnt get a callback.',
+    content: 'Whats the object oriented way to become wealthy? Inheritance.',
+    name: 'Wealthy',
+  },
+  {
+    content: 'Why do programmers prefer dark mode? Because light attracts bugs.',
+    name: 'Dark Mode',
+  },
+  {
+    content: 'Whats a frontend developers favorite place to visit? The viewport.',
+    name: 'Visit',
+  },
+  {
+    content: 'Why was the function sad after a successful first call? Because he didnt get a callback.',
     name: 'Callback',
   },
   {
     content: 'Why did the developer go broke? He used up all his cache.',
-    favorite: true,
     name: 'Cache',
   },
   {
-    content:
-      'Why couldnt the React component understand the joke? It didnt get the context.',
+    content: 'Why couldnt the React component understand the joke? It didnt get the context.',
     name: 'React',
   },
   {
-    content:
-      'Why did the angry function exceed the callstack size? It had beef with another function.',
+    content: 'Why did the angry function exceed the callstack size? It had beef with another function.',
     name: 'Callstack',
   },
   {
@@ -40,33 +46,27 @@ const JOKES = [
     name: 'Shampoo',
   },
   {
-    content:
-      'Why do most Java programmers wear glasses? Because they dont see sharp.',
+    content: 'Why do most Java programmers wear glasses? Because they dont see sharp.',
     name: 'Java',
   },
   {
-    content:
-      'Why are Assembly programmers always soaking wet? They work below C-level.',
+    content: 'Why are Assembly programmers always soaking wet? They work below C-level.',
     name: 'Programmers',
   },
   {
-    content:
-      'What do you call a developer who doesnt comment code? A developer.',
+    content: 'What do you call a developer who doesnt comment code? A developer.',
     name: 'Comments',
   },
   {
-    content:
-      'Why did the child component have such great self-esteem? Because its parent kept giving it props!',
+    content: 'Why did the child component have such great self-esteem? Because its parent kept giving it props!',
     name: 'JavaScript',
   },
   {
-    content:
-      'Why do frontend developers eat lunch alone? They dont know how to join tables.',
+    content: 'Why do frontend developers eat lunch alone? They dont know how to join tables.',
     name: 'Tables',
   },
   {
-    content:
-      'Why did the web developer leave the restaurant? Because of the table layout.',
+    content: 'Why did the web developer leave the restaurant? Because of the table layout.',
     name: 'Layout',
   },
   {
@@ -77,16 +77,14 @@ const JOKES = [
 
 function seedJokes() {
   Promise.all(
-    JOKES.map((n) => {
-      return prisma.joke.create({
-        data: { content: n.content, favorite: n.favorite, name: n.name },
-      });
-    })
+    JOKES.map(n => {
+      return prisma.joke.create({ data: { content: n.content, name: n.name } });
+    }),
   )
     .then(() => {
       return console.info('[SEED] Succussfully create joke records');
     })
-    .catch((e) => {
+    .catch(e => {
       return console.error('[SEED] Failed to create joke records', e);
     });
 }

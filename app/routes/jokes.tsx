@@ -16,7 +16,7 @@ export const loader = async () => {
   const jokeListItems = await prisma.joke.findMany({
     orderBy: { createdAt: 'desc' },
     select: { favorite: true, id: true, name: true },
-    take: 5,
+    take: 10,
   });
   return { jokeListItems };
 };
