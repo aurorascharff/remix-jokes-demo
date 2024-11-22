@@ -6,6 +6,7 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
+    ".react-router/types/**/*",
     "prisma/seed.ts"
   ],
   "compilerOptions": {
