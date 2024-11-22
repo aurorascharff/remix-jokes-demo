@@ -1,11 +1,10 @@
 import { Link, Outlet, useNavigation } from 'react-router';
 import type { Route } from './+types/jokes';
-import type { MetaFunction } from 'react-router';
 import { prisma } from '~/../db';
 import NavButton from '~/components/ui/NavButton';
 import { cn } from '~/utils/style';
 
-export const meta: MetaFunction = () => {
+export const meta = () => {
   return [
     { content: 'Remix Jokes app', name: 'description' },
     { title: 'Jokes' },

@@ -6,8 +6,6 @@ import {
 } from 'react-router';
 import { z } from 'zod';
 import type { Route } from './+types/jokes.new';
-import type {
-  MetaFunction} from 'react-router';
 import { prisma } from '~/../db';
 import JokeDisplay from '~/components/JokeDisplay';
 import Button from '~/components/ui/Button';
@@ -28,7 +26,7 @@ const jokeSchema = z.object({
   }),
 });
 
-export const meta: MetaFunction = () => {
+export const meta = () => {
   return [
     { content: 'Remix Jokes app', name: 'description' },
     { title: 'New joke' },

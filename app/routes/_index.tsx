@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
-import type { MetaFunction } from 'react-router';
 
-export const meta: MetaFunction = () => {
+export const meta = () => {
   return [
     { content: 'Remix Jokes app', name: 'description' },
     { title: 'Remix Jokes' },
