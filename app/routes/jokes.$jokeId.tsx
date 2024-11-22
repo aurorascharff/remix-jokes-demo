@@ -2,15 +2,13 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from 'react-router';
-import type { Route } from './+types.jokes.$jokeId';
-import type {
-  MetaFunction} from 'react-router';
+import type { Route } from './+types/jokes.$jokeId';
 import { prisma } from '~/../db';
 import JokeDisplay from '~/components/JokeDisplay';
 import ErrorMessage from '~/components/ui/ErrorMessage';
 import { slow } from '~/utils/slow';
 
-export const meta: MetaFunction<() => Route.LoaderData> = ({ data }) => {
+export const meta = ({ data }: Route.MetaArgs) => {
   const { description, title } = data
     ? {
         description: `Enjoy the "${data.joke.name}" joke and much more`,

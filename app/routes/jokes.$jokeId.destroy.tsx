@@ -1,5 +1,5 @@
 import { redirect } from 'react-router';
-import type { Route } from './+types.jokes.$jokeId.destroy';
+import type { Route } from './+types/jokes.$jokeId.destroy';
 import { prisma } from '~/../db';
 import { slow } from '~/utils/slow';
 

@@ -1,5 +1,5 @@
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router';
-import type { Route } from './+types.jokes._index';
+import type { Route } from './+types/jokes._index';
 import { prisma } from '~/../db';
 import ErrorMessage from '~/components/ui/ErrorMessage';
 

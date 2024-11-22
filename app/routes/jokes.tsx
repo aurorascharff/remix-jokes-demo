@@ -1,5 +1,5 @@
 import { Link, Outlet, useNavigation } from 'react-router';
-import type { Route } from './+types.jokes';
+import type { Route } from './+types/jokes';
 import type { MetaFunction } from 'react-router';
 import { prisma } from '~/../db';
 import NavButton from '~/components/ui/NavButton';

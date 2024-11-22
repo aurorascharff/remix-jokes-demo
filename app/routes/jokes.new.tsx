@@ -5,7 +5,7 @@ import {
   redirect,
 } from 'react-router';
 import { z } from 'zod';
-import type { Route } from './+types.jokes.new';
+import type { Route } from './+types/jokes.new';
 import type {
   MetaFunction} from 'react-router';
 import { prisma } from '~/../db';
