@@ -30,7 +30,9 @@ Dont show error boundary.
 
 ## UI: Index.tsx
 
-Lets look at Index.tsx. Showcase in app the page. Use the web! Central part of Remix. Remix feels familiar to oldschool devs. Less reacty. Learning the web when learning Remix. This is a Remix Route Module for the index page. It's using the Remix Link component to provide client side navigation and prefetch on hover for example. It's also definitng metadata to be collected for the head with this metafunction.
+Lets look at Index.tsx. Showcase in app the page. Use the web! Central part of Remix. Remix feels familiar to oldschool devs. Less reacty. Learning the web when learning Remix. This is a Remix Route Module for the index page. It's using the Remix Link component to provide client side navigation and prefetch on hover for example. Show prefteching in console!
+
+It's also defining metadata to be collected for the head with this metafunction.
 
 ## CSS: Index.tsx
 
