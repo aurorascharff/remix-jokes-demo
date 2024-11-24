@@ -10,7 +10,7 @@ export default function JokeDisplay({
   canDelete?: boolean;
 }) {
   const navigation = useNavigation();
-  const isSubmitting = navigation.formData?.get('intent') === 'delete';
+  const isDeleting = navigation.formData?.get('intent') === 'delete';
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -22,12 +22,12 @@ export default function JokeDisplay({
       </div>
       <Form action="destroy" method="post">
         <Button
-          disabled={!canDelete || isSubmitting}
+          disabled={!canDelete || isDeleting}
           name="intent"
           type="submit"
           value="delete"
         >
-          {isSubmitting ? 'Deleting...' : 'Delete'}
+          {isDeleting ? 'Deleting...' : 'Delete'}
         </Button>
       </Form>
     </div>
