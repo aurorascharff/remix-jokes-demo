@@ -68,15 +68,17 @@ There is a method post on this, which will call the route for the route module w
 
 We don't need api routes to talk to our server from the client.
 
-We also now create this additional UI enhancement with a isSubmitting value, that checks whether the navigation is not idle and is on the action "jokes/new". It will disable the button when the form submits.
-
-In addition it's doing optimistic UI by returning a view of a JokeDisplay if the validation succeeds. This is a client side update that will show the joke in the list before the server has responded.
-
 ## Revalidation: jokes.new.tsx
 
 Data is automatically revalidates. No fuss with adding items to lists. It's always the same. No manual revalidation. It's always in sync with the server. We can push or filter lists client side.
 
 Show network tab loading and revalidating.
+
+## Optimistic UI: jokes.new.tsx
+
+We also now create this additional UI enhancement with a isSubmitting value, that checks whether the navigation is not idle and is on the action "jokes/new". It will disable the button when the form submits.
+
+In addition it's doing optimistic UI by returning a view of a JokeDisplay if the validation succeeds. This is a client side update that will show the joke in the list before the server has responded.
 
 ## RRM for single joke: joke.$jokeid.tsx
 

@@ -87,32 +87,25 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
     <div className="flex flex-col gap-5">
       <p>Add your own hilarious joke</p>
       <Form method="post">
-        <div>
-          <label>
-            Name:{' '}
             <Input
+            label="Name:"
               errors={actionData?.fieldErrors?.name}
               defaultValue={actionData?.fields?.name}
               name="name"
               type="text"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Content:{' '}
+              />
             <TextArea
+            label="Content:"
               errors={actionData?.fieldErrors?.content}
               defaultValue={actionData?.fields?.content}
               name="content"
             />
-          </label>
-        </div>
         <div className="flex justify-end">
           <Button disabled={isSubmitting} type="submit">
             {isSubmitting ? 'Adding...' : 'Add'}
           </Button>
         </div>
+
       </Form>
     </div>
   );
