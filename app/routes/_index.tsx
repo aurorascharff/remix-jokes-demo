@@ -1,10 +1,7 @@
 import { Link } from 'react-router';
 
 export const meta = () => {
-  return [
-    { content: 'Remix Jokes app', name: 'description' },
-    { title: 'Remix Jokes' },
-  ];
+  return [{ content: 'Remix Jokes app', name: 'description' }, { title: 'Remix Jokes' }];
 };
 
 export default function IndexRoute() {
@@ -12,10 +9,7 @@ export default function IndexRoute() {
     <div className="flex grow flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center pb-12 pt-12">
         <h1 className="text-center font-display text-6xl text-shadow">
-          Remix{' '}
-          <span className="block font-display text-6xl uppercase leading-none md:text-9xl">
-            Jokes!
-          </span>
+          Remix <span className="block font-display text-6xl uppercase leading-none md:text-9xl">Jokes!</span>
         </h1>
         <nav>
           <ul className="flex list-none gap-4 p-0 font-display text-lg leading-none">

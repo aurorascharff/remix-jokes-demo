@@ -1,7 +1,4 @@
-import {
-  isRouteErrorResponse,
-  useRouteError,
-} from 'react-router';
+import { isRouteErrorResponse, useRouteError } from 'react-router';
 import type { Route } from './+types/jokes.$jokeId';
 import { prisma } from '~/../db';
 import JokeDisplay from '~/components/JokeDisplay';
@@ -62,15 +59,9 @@ export function ErrorBoundary({ params }: Route.ErrorBoundaryProps) {
 
   if (isRouteErrorResponse(error)) {
     if (error.status === 404) {
-      return (
-        <ErrorMessage>Huh? What the heck is &quot;{jokeId}&quot;?</ErrorMessage>
-      );
+      return <ErrorMessage>Huh? What the heck is &quot;{jokeId}&quot;?</ErrorMessage>;
     }
   }
 
-  return (
-    <ErrorMessage>
-      There was an error loading joke by the id &quot;${jokeId}&quot;. Sorry.
-    </ErrorMessage>
-  );
+  return <ErrorMessage>There was an error loading joke by the id &quot;${jokeId}&quot;. Sorry.</ErrorMessage>;
 }

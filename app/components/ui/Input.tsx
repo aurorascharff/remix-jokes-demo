@@ -14,9 +14,7 @@ export default function Input({
 }: Props & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="w-full">
-      <label htmlFor={name}>
-        {label}
-      </label>
+      <label htmlFor={name}>{label}</label>
       <input
         id={name}
         name={name}

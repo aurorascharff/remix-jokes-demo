@@ -20,8 +20,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
     take: 100,
   });
 
-  const host =
-    request.headers.get('X-Forwarded-Host') ?? request.headers.get('host');
+  const host = request.headers.get('X-Forwarded-Host') ?? request.headers.get('host');
   if (!host) {
     throw new Error('Could not determine domain URL.');
   }
@@ -39,13 +38,11 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
         <generator>Kody the Koala</generator>
         <ttl>40</ttl>
         ${jokes
-          .map((joke) => {
+          .map(joke => {
             return `
             <item>
               <title><![CDATA[${escapeCdata(joke.name)}]]></title>
-              <description><![CDATA[A funny joke called ${escapeHtml(
-                joke.name
-              )}]]></description>
+              <description><![CDATA[A funny joke called ${escapeHtml(joke.name)}]]></description>
               <pubDate>${joke.createdAt.toUTCString()}</pubDate>
               <link>${jokesUrl}/${joke.id}</link>
               <guid>${jokesUrl}/${joke.id}</guid>

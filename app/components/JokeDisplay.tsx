@@ -21,12 +21,7 @@ export default function JokeDisplay({
         <Favorite joke={joke} />
       </div>
       <Form action="destroy" method="post">
-        <Button
-          disabled={!canDelete || isDeleting}
-          name="intent"
-          type="submit"
-          value="delete"
-        >
+        <Button disabled={!canDelete || isDeleting} name="intent" type="submit" value="delete">
           {isDeleting ? 'Deleting...' : 'Delete'}
         </Button>
       </Form>
@@ -34,15 +29,9 @@ export default function JokeDisplay({
   );
 }
 
-function Favorite({
-  joke,
-}: {
-  joke: Pick<Joke, 'content' | 'name' | 'favorite'>;
-}) {
+function Favorite({ joke }: { joke: Pick<Joke, 'content' | 'name' | 'favorite'> }) {
   const fetcher = useFetcher();
-  const favorite = fetcher.formData
-    ? fetcher.formData.get('favorite') === 'true'
-    : joke.favorite;
+  const favorite = fetcher.formData ? fetcher.formData.get('favorite') === 'true' : joke.favorite;
 
   return (
     <fetcher.Form method="post">

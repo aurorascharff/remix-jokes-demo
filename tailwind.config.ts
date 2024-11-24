@@ -7,13 +7,13 @@ const config: Config = {
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {
-          'text-shadow': (value) => {
+          'text-shadow': value => {
             return {
               textShadow: value,
             };
           },
         },
-        { values: theme('textShadow') }
+        { values: theme('textShadow') },
       );
     }),
   ],
