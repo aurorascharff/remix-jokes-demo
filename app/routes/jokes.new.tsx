@@ -1,9 +1,4 @@
-import {
-  Form,
-  
-  useRouteError,
-  redirect,
-} from 'react-router';
+import { Form, useRouteError, redirect } from 'react-router';
 import { z } from 'zod';
 import type { Route } from './+types/jokes.new';
 import { prisma } from '~/../db';
@@ -21,15 +16,12 @@ const jokeSchema = z.object({
   createdAt: z.date().optional(),
   id: z.string().optional(),
   name: z.string().min(2, {
-    message: 'That joke\'s name is too short',
+    message: 'That jokes name is too short',
   }),
 });
 
 export const meta = () => {
-  return [
-    { content: 'Remix Jokes app', name: 'description' },
-    { title: 'New joke' },
-  ];
+  return [{ content: 'Remix Jokes app', name: 'description' }, { title: 'New joke' }];
 };
 
 export const action = async ({ request }: Route.ActionArgs) => {
@@ -62,25 +54,22 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
     <div className="flex flex-col gap-5">
       <p>Add your own hilarious joke</p>
       <Form method="post">
-            <Input
-            label="Name:"
-              errors={actionData?.fieldErrors?.name}
-              defaultValue={actionData?.fields?.name}
-              name="name"
-              type="text"
-              />
-            <TextArea
-            label="Content:"
-              errors={actionData?.fieldErrors?.content}
-              defaultValue={actionData?.fields?.content}
-              name="content"
-            />
+        <Input
+          label="Name:"
+          errors={actionData?.fieldErrors?.name}
+          defaultValue={actionData?.fields?.name}
+          name="name"
+          type="text"
+        />
+        <TextArea
+          label="Content:"
+          errors={actionData?.fieldErrors?.content}
+          defaultValue={actionData?.fields?.content}
+          name="content"
+        />
         <div className="flex justify-end">
-          <Button type="submit">
-            Add
-          </Button>
+          <Button type="submit">Add</Button>
         </div>
-
       </Form>
     </div>
   );
@@ -90,9 +79,5 @@ export function ErrorBoundary() {
   const error = useRouteError();
   console.error(error);
 
-  return (
-    <ErrorMessage>
-      Something unexpected went wrong. Sorry about that.
-    </ErrorMessage>
-  );
+  return <ErrorMessage>Something unexpected went wrong. Sorry about that.</ErrorMessage>;
 }

@@ -7,11 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function NavButton({
-  to,
-  children,
-  ...otherProps
-}: Props & LinkProps) {
+export default function NavButton({ to, children, ...otherProps }: Props & LinkProps) {
   return (
     <Link
       {...otherProps}

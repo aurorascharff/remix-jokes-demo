@@ -18,12 +18,7 @@ export default function JokeDisplay({
         <Favorite joke={joke} />
       </div>
       <Form action="destroy" method="post">
-        <Button
-          disabled={!canDelete}
-          name="intent"
-          type="submit"
-          value="delete"
-        >
+        <Button disabled={!canDelete} name="intent" type="submit" value="delete">
           Delete
         </Button>
       </Form>
@@ -31,11 +26,7 @@ export default function JokeDisplay({
   );
 }
 
-function Favorite({
-  joke,
-}: {
-  joke: Pick<Joke, 'content' | 'name' | 'favorite'>;
-}) {
+function Favorite({ joke }: { joke: Pick<Joke, 'content' | 'name' | 'favorite'> }) {
   const fetcher = useFetcher();
   const favorite = joke.favorite;
 

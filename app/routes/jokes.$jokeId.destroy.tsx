@@ -16,7 +16,7 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
     where: { id: params.jokeId },
   });
   if (!joke) {
-    throw new Response('Can\'t delete what does not exist', {
+    throw new Response('Cant delete what does not exist', {
       status: 404,
     });
   }
