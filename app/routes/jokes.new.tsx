@@ -1,13 +1,12 @@
 import {
   Form,
-  useNavigation,
+  
   useRouteError,
   redirect,
 } from 'react-router';
 import { z } from 'zod';
 import type { Route } from './+types/jokes.new';
 import { prisma } from '~/../db';
-import JokeDisplay from '~/components/JokeDisplay';
 import Button from '~/components/ui/Button';
 import ErrorMessage from '~/components/ui/ErrorMessage';
 import Input from '~/components/ui/Input';
@@ -59,30 +58,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
 };
 
 export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
-  const navigation = useNavigation();
-  const isSubmitting =
-    navigation.state !== 'idle' && navigation.formAction === 'jokes/new';
-
-  // Optimistic update
-  if (navigation.formData) {
-    const result = jokeSchema.safeParse({
-      content: navigation.formData.get('content'),
-      name: navigation.formData.get('name'),
-    });
-    if (result.success) {
-      return (
-        <JokeDisplay
-          canDelete={false}
-          joke={{
-            content: result.data.content,
-            favorite: false,
-            name: result.data.name,
-          }}
-        />
-      );
-    }
-  }
-
   return (
     <div className="flex flex-col gap-5">
       <p>Add your own hilarious joke</p>
@@ -101,8 +76,8 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
               name="content"
             />
         <div className="flex justify-end">
-          <Button disabled={isSubmitting} type="submit">
-            {isSubmitting ? 'Adding...' : 'Add'}
+          <Button type="submit">
+            Add
           </Button>
         </div>
 

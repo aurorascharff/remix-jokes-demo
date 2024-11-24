@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigation } from 'react-router';
+import { Link, Outlet } from 'react-router';
 import type { Route } from './+types/jokes';
 import { prisma } from '~/../db';
 import NavButton from '~/components/ui/NavButton';
@@ -21,10 +21,6 @@ export const loader = async () => {
 };
 
 export default function JokesRoute({ loaderData }: Route.ComponentProps) {
-  const navigation = useNavigation();
-  const isLoadingJoke =
-    navigation.state === 'loading' && location.pathname !== '/jokes/new';
-
   return (
     <div className="flex min-h-[100svh] w-full flex-col gap-5 bg-purple">
       <header className="border-b-2 border-purple-light py-4">
@@ -57,7 +53,7 @@ export default function JokesRoute({ loaderData }: Route.ComponentProps) {
           <NavButton to="new">Add your own</NavButton>
         </div>
         <div
-          className={cn(isLoadingJoke && 'animate-pulse', 'w-full xl:w-1/3')}
+          className={cn(false && 'animate-pulse', 'w-full xl:w-1/3')}
         >
           <Outlet />
         </div>

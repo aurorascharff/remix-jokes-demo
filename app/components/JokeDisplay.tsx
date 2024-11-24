@@ -1,4 +1,4 @@
-import { Form, Link, useFetcher, useNavigation } from 'react-router';
+import { Form, Link, useFetcher } from 'react-router';
 import Button from './ui/Button';
 import type { Joke } from '@prisma/client';
 
@@ -9,9 +9,6 @@ export default function JokeDisplay({
   joke: Pick<Joke, 'content' | 'name' | 'favorite'>;
   canDelete?: boolean;
 }) {
-  const navigation = useNavigation();
-  const isSubmitting = navigation.formData?.get('intent') === 'delete';
-
   return (
     <div className="flex flex-col gap-y-4">
       <p>Here&apos;s your hilarious joke:</p>
@@ -22,12 +19,12 @@ export default function JokeDisplay({
       </div>
       <Form action="destroy" method="post">
         <Button
-          disabled={!canDelete || isSubmitting}
+          disabled={!canDelete}
           name="intent"
           type="submit"
           value="delete"
         >
-          {isSubmitting ? 'Deleting...' : 'Delete'}
+          Delete
         </Button>
       </Form>
     </div>
@@ -40,9 +37,7 @@ function Favorite({
   joke: Pick<Joke, 'content' | 'name' | 'favorite'>;
 }) {
   const fetcher = useFetcher();
-  const favorite = fetcher.formData
-    ? fetcher.formData.get('favorite') === 'true'
-    : joke.favorite;
+  const favorite = joke.favorite;
 
   return (
     <fetcher.Form method="post">
