@@ -84,9 +84,9 @@ JokeDisplay can delete a joke, but this is now a relative URL using a action="/d
 
 It can also be favorited. Maybe a bit weird to see a form for this. This triggers the relative URL action="/". This is a relative URL that will call the route module with the action favorite. Here we use a fetcher Form because we are not navigating anywhere and we don't want to trigger a new push to the router.
 
-## Does'nt feel that good
+## App doesn't feel that good
 
-The app has some natural delay and that makes it net feel so good. Let's switch to another version of the app that has some UI enhancements.
+The app has some, realistic added delay and that makes it net feel so good. Let's switch to another version of the app that has some UI enhancements.
 
 ## UI enhancements: jokes.tsx
 
