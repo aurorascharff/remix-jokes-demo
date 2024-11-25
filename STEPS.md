@@ -24,7 +24,7 @@ An `app` folder, and i revealed the entry.server and entry.client files. Here ar
 
 Let's start with the routes folder. I'm using file-based routing here and my RRM's are defined as files, and we have to follow a certain convention. THis is called flat routes, we define routes with dot and other chars. Maybe you like it, maybe you don't. Common in most meta-frameworks, but with very different rules. There is also a code-option as mentioned. Show routes.ts file to define code based routing. Route modules are code split so we can lazily load js as we navigate to new routes for better performance.
 
-## Routes: root.tsx
+## Remix Route Modules: root.tsx
 
 Start with root.tsx. This is the root route module. It has a special Layout export' returning the root document with the metadata and links that are collected from link functions and meta functions for route modules, and inserted into the head. It's then returning the children of the layout, which is the default export, App.
 
@@ -84,25 +84,27 @@ JokeDisplay can delete a joke, but this is now a relative URL using a action="/d
 
 It can also be favorited. Maybe a bit weird to see a form for this. This triggers the relative URL action="/". This is a relative URL that will call the route module with the action favorite. Here we use a fetcher Form because we are not navigating anywhere and we don't want to trigger a new push to the router.
 
-## App doesn't feel that good
+## Browser framework
 
-The app has some, realistic added delay and that makes it net feel so good. Let's switch to another version of the app that has some UI enhancements.
+The app has some, realistic added delay and that makes it not feel so good. And until we didn't actually use that much of the browser framework, only Form and Links and prefetching etc. We are able to create all this without any React-stuff. Amazing right?
 
-## UI enhancements: jokes.tsx
+Let's switch to another version of the app that has some UI enhancements using more of the browser framework of Remix.
+
+### UI enhancements: jokes.tsx
 
 In the jokes.tsx, we will use a Remix specific hooks around here which is the browser framework. This one is called useNavigation. It will give you the current state of the navigation, and provide i.e whether the router is navigating, which we use here to mark the page as pending with css. This hook adds on top of our base case HTML web standard document with additional client-side, js enhanced features. This is Remix's way to do progressive enhancement.
 
-## Optimistic UI: jokes.new.tsx
+### Optimistic UI: jokes.new.tsx
 
 We have also created this additional UI enhancement with a isSubmitting value, that checks whether the navigation is not idle and is on the action "jokes/new". It will disable the button when the form submits.
 
 In addition it's doing optimistic UI by returning a view of a JokeDisplay if the validation succeeds. This is a client side update that will show the joke in the list before the server has responded.
 
-## Ui enhancements: joke.$jokeid.tsx
+### UI enhancements: joke.$jokeid.tsx
 
 Delete is enhanced with a disabled button again when the navigation is not idle and is on the intent "delete".
 
-For the favorite, we can get the state of this fetcher form locally and do another optimistic update.
+For the favorite, we can get the state of this fetcher form locally and do another optimistic update. Fetcher is local scoped to the component.
 
 ## Progressive enhancement turn off JS
 
