@@ -60,11 +60,11 @@ Here we catch the error that might occur when posting a new joke to the db. We c
 
 ## Mutations: jokes.new.tsx
 
-Relative route. Lets move to the jokes.new.tsx route module. Default export has a form. Don't worry about this optimistic update yet let's just look at the form. This is similar to our example from the slides. Remix Form component will provide extra features on top of default form component, such as client side nav avoiding full page reload.
+Relative route. Lets move to the jokes.new.tsx route module. Default export has a form, capital letter. This is similar to our example from the slides. Remix Form component will provide extra features on top of default form component, such as client side nav avoiding full page reload.
 
 There is a method post on this, which will call the route for the route module with its action. The action validates using zod and returns errors if invalid inside a badRequest wrapper. Customizable. Then it redirects. Show console of network tab to show the post and get requests. GET data joke.new. POST data joke.new with location in the equest. New GET for revalidation.
 
-We don't need api routes to talk to our server from the client.
+We don't need api routes to talk to our server from the client. Route module is it's own API route talking to itself.
 
 ## Revalidation: jokes.new.tsx
 
