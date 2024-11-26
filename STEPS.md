@@ -54,6 +54,8 @@ It's defining lots of UI from this default component. A header, a sidebar with j
 
 Further down there is a Outlet component and a footer, the outlet is for defining this routes children routes, using nested layouts here. This allows us to build complex UIs. And remix can fetch data for all nested routes in parallel.
 
+## Errors: jokes._index.tsx
+
 The index route is the default child of the jokes route, and is rendered in the outlet on the route. It's using a loader to fetch a random joke. Throws a 404 if no joke is found.
 
 Here we catch the error that might occur when posting a new joke to the db. We can show a custom error message here. We can also use the error hook to get the error and show it in the UI. Here catching a 404 error to display a custom message with a link to the jokes page.
@@ -86,7 +88,7 @@ It can also be favorited. Maybe a bit weird to see a form for this. This trigger
 
 ## Browser framework
 
-The app has some, realistic added delay and that makes it not feel so good. And until we didn't actually use that much of the browser framework, only Form and Links and prefetching etc. We are able to create all this without any React-stuff. Amazing right?
+The app has some, realistic added delay and that makes it not feel so good. And until we didn't actually use that much of the browser framework, only Form and Links and prefetching etc. Does this feel like React? We are able to create all this without any React-stuff. Amazing right?
 
 Let's switch to another version of the app that has some UI enhancements using more of the browser framework of Remix.
 
