@@ -8,7 +8,7 @@ Let's review the setup and starting point. I'm using React Router v7 here, then 
 
 Be in fullscreen version.
 
-Show the app. We have a list of jokes, a form to add new jokes, and a way to navigate. View jokes, get random joke, add new link and validate, create (funny joke), delete, favorite.
+Show the app. We have a list of jokes, a form to add new jokes, and a way to navigate. View jokes, get random joke, add new link, create + validate (funny joke), delete, favorite.
 
 ## Boilerplate
 
@@ -52,7 +52,7 @@ Lets move to the rest of the files. Jokes.tsx is a relative route. Go to jokes i
 
 It's defining lots of UI from this default component. A header, a sidebar with jokes and Links, and mapping jokes to link with prefetch. If prefetched, we don't see this indicator.
 
-Further down there is a Outlet component and a footer, the outlet is for defining this routes children routes, using nested layouts here. This allows us to build complex UIs. And remix can fetch data for all nested routes in parallel.
+Further down there is a Outlet component and a footer, the outlet is for defining this routes children routes, using nested layouts here again.
 
 ## Errors: jokes._index.tsx
 
