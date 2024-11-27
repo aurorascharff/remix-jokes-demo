@@ -96,7 +96,7 @@ Let's switch to another version of the app that has some UI enhancements using m
 
 In the jokes.tsx, we will use a Remix specific hooks around here which is the browser framework. This one is called useNavigation. It will give you the current state of the navigation, and provide i.e whether the router is navigating, which we use here to mark the page as pending with css. This hook adds on top of our base case HTML web standard document with additional client-side, js enhanced features. This is Remix's way to do progressive enhancement.
 
-### Pendin UI + Optimistic UI: joke.$jokeid.tsx
+### Pending UI + Optimistic UI: joke.$jokeid.tsx
 
 Delete is enhanced with a disabled button again when the navigation is not idle and is on the intent "delete".
 
