@@ -12,6 +12,7 @@ export default function JokeDisplay({
 }) {
   const navigation = useNavigation();
   const isDeleting = navigation.formData?.get('intent') === 'delete';
+  const canMutate = canDelete && !isDeleting;
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -19,10 +20,10 @@ export default function JokeDisplay({
       <p>{joke.content}</p>
       <div className="flex flex-row gap-2 text-yellow w-fit text-nowrap">
         <Link to=".">&quot;{joke.name}&quot; Permalink</Link>
-        <Favorite joke={joke} />
+        <Favorite disabled={!canMutate} joke={joke} />
       </div>
       <Form action="destroy" method="post">
-        <Button disabled={!canDelete || isDeleting} name="intent" type="submit" value="delete">
+        <Button disabled={!canMutate} name="intent" type="submit" value="delete">
           {isDeleting ? 'Deleting...' : 'Delete'}
         </Button>
       </Form>
