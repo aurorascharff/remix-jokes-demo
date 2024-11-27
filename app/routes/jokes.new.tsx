@@ -52,7 +52,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
 export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
   const navigation = useNavigation();
-  const isSubmitting = navigation.state !== 'idle' && navigation.formAction === 'jokes/new';
 
   // Optimistic update
   if (navigation.formData) {
@@ -92,9 +91,7 @@ export default function NewJokeRoute({ actionData }: Route.ComponentProps) {
           name="content"
         />
         <div className="flex justify-end">
-          <Button disabled={isSubmitting} type="submit">
-            {isSubmitting ? 'Adding...' : 'Add'}
-          </Button>
+          <Button type="submit">Add</Button>
         </div>
       </Form>
     </div>
