@@ -1,7 +1,9 @@
-import { isRouteErrorResponse, useRouteError } from 'react-router';
+import { Form, isRouteErrorResponse, Link, useRouteError } from 'react-router';
 import type { Route } from './+types/jokes.$jokeId';
 import { prisma } from '~/../db';
-import JokeDisplay from '~/components/JokeDisplay';
+
+import Favorite from '~/components/Favorite';
+import Button from '~/components/ui/Button';
 import ErrorMessage from '~/components/ui/ErrorMessage';
 import { slow } from '~/utils/slow';
 
@@ -49,7 +51,23 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
 };
 
 export default function JokeRoute({ loaderData }: Route.ComponentProps) {
-  return <JokeDisplay joke={loaderData.joke} />;
+  const joke = loaderData.joke;
+
+  return (
+    <div className="flex flex-col gap-y-4">
+      <p>Here&apos;s your hilarious joke:</p>
+      <p>{joke.content}</p>
+      <div className="flex flex-row gap-2 text-yellow w-fit text-nowrap">
+        <Link to=".">&quot;{joke.name}&quot; Permalink</Link>
+        <Favorite joke={joke} />
+      </div>
+      <Form action="destroy" method="post">
+        <Button name="intent" type="submit" value="delete">
+          Delete
+        </Button>
+      </Form>
+    </div>
+  );
 }
 
 export function ErrorBoundary({ params }: Route.ErrorBoundaryProps) {
