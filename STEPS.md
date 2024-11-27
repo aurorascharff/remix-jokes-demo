@@ -92,21 +92,19 @@ The app has some, realistic added delay and that makes it not feel so good. And 
 
 Let's switch to another version of the app that has some UI enhancements using more of the browser framework of Remix.
 
-### UI enhancements: jokes.tsx
+### Loading UI: jokes.tsx
 
 In the jokes.tsx, we will use a Remix specific hooks around here which is the browser framework. This one is called useNavigation. It will give you the current state of the navigation, and provide i.e whether the router is navigating, which we use here to mark the page as pending with css. This hook adds on top of our base case HTML web standard document with additional client-side, js enhanced features. This is Remix's way to do progressive enhancement.
 
-### Optimistic UI: jokes.new.tsx
-
-We have also created this additional UI enhancement with a isSubmitting value, that checks whether the navigation is not idle and is on the action "jokes/new". It will disable the button when the form submits.
-
-In addition it's doing optimistic UI by returning a view of a JokeDisplay if the validation succeeds. This is a client side update that will show the joke in the list before the server has responded.
-
-### UI enhancements: joke.$jokeid.tsx
+### Pending UI + Optimistic UI: joke.$jokeid.tsx
 
 Delete is enhanced with a disabled button again when the navigation is not idle and is on the intent "delete".
 
 For the favorite, we can get the state of this fetcher form locally and do another optimistic update. Fetcher is local scoped to the component.
+
+### Optimistic UI: jokes.new.tsx
+
+It's doing optimistic UI by returning a view of a JokeDisplay if the validation succeeds. This is a client side update that will show the joke in the list before the server has responded.
 
 ## Progressive enhancement turn off JS
 
